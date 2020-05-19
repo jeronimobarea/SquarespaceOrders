@@ -35,6 +35,17 @@ const ApiKey = "YOUR SQUARESPACE API KEY"
 const squareSpaceURL = "https://api.squarespace.com/1.0/commerce/orders/"
 ```
 
+
+For testing the app in dev mode.
+```go
+go run *.go
+```
+
+For production or deploy.
+```go
+go build
+```
+
 Default data that I store is. The fields that have an interface type is because
 I don't know what field type are so feel free to improve it for yourself.
 ```go
