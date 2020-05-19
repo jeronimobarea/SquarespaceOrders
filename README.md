@@ -1,4 +1,4 @@
-# Squarespace Orders
+# Squarespace Orders v 0.1
 This api checks every 24h your Squarespace orders api and retrieves the data of all
 the orders and create docs for every email and stores the orders by email also saves
 basic user info. You can customize the info that you want with the struct's that 
