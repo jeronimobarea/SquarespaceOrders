@@ -1,0 +1,16 @@
+
+src/cloud.google.com/go/
+src/github.com/golang/groupcache/
+src/github.com/golang/protobuf/
+src/github.com/google/go-cmp/
+src/github.com/googleapis/gax-go/
+src/github.com/gorilla/mux/
+src/go.opencensus.io/
+src/golang.org/x/net/
+src/golang.org/x/oauth2/
+src/golang.org/x/text/
+src/golang.org/x/xerrors/
+src/google.golang.org/api/
+src/google.golang.org/genproto/
+src/google.golang.org/grpc/
+src/google.golang.org/protobuf/
