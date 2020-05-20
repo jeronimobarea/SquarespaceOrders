@@ -28,7 +28,7 @@ func main() {
 	/**
 	Ticker configuration for checking the api every 24h.
 	*/
-	ticker := time.NewTicker(1 * time.Minute)
+	ticker := time.NewTicker(24 * time.Hour)
 	go func() {
 		for t := range ticker.C {
 			_ = t
