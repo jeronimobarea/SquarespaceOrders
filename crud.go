@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func MakeOrdersQueryFiltered(url string) (FilteredResult, error) {
+func FetchAPI(url string) (FilteredResult, error) {
 	req, err := http.NewRequest("GET", url, nil)
 
 	if err != nil {
@@ -34,7 +34,7 @@ func MakeOrdersQueryFiltered(url string) (FilteredResult, error) {
 	return order, nil
 }
 
-func InsertManyOrdersFiltered() error {
+func CheckOrders() error {
 	ctx := context.Background()
 	client := createClient(ctx)
 	defer client.Close()
@@ -45,7 +45,7 @@ func InsertManyOrdersFiltered() error {
 	var rawData FilteredResult
 	var initialCall = true
 
-	rawData, _ = MakeOrdersQueryFiltered(squareSpaceURL)
+	rawData, _ = FetchAPI(squareSpaceURL)
 
 	for do {
 		initialResults := rawData.Result
@@ -65,21 +65,23 @@ func InsertManyOrdersFiltered() error {
 			_, _ = client.Collection("users").Doc(
 				initialResults[i].CustomerEmail).Create(ctx, initialResults[i].UserData)
 
-			fmt.Println(initialResults[i].ID + " - " + initialResults[i].CustomerEmail)
+			fmt.Println("Order ID -> " + initialResults[i].ID)
 
 			for j := 0; j < len(initialResults[i].Items); j++ {
 				/**
 				Fill the user email doc with the orders.
 				*/
+				initialResults[i].Items[j].CreatedOn = initialResults[i].CreatedOn
 				_, _ = client.Collection("users").Doc(
 					initialResults[i].CustomerEmail).Collection("orders").Doc(
 					initialResults[i].Items[j].ProductName).Set(ctx, initialResults[i].Items[j])
+				fmt.Println("Product ID -> " + initialResults[i].Items[j].ProductID)
 			}
 		}
 
-		if do == true && nextPageUrl != "" && !initialCall {
+		if do && nextPageUrl != "" && !initialCall {
 			orders = []interface{}{}
-			rawData, _ = MakeOrdersQueryFiltered(nextPageUrl)
+			rawData, _ = FetchAPI(nextPageUrl)
 			initialResults = rawData.Result
 		}
 		initialCall = false
