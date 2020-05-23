@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-func FetchOrdersFilter(w http.ResponseWriter, r *http.Request) {
+func FetchOrdersAndFilter(w http.ResponseWriter, r *http.Request) {
 	/**
 	Handler for manually check for updates.
 	*/
-	err := InsertManyOrdersFiltered()
+	err := CheckOrders()
 
 	if err != nil {
 		fmt.Println(err)

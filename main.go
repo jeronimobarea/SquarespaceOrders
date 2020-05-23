@@ -33,7 +33,7 @@ func main() {
 		for t := range ticker.C {
 			_ = t
 			fmt.Println("Checking Squarespace API on -> ", time.Now())
-			_ = InsertManyOrdersFiltered()
+			_ = CheckOrders()
 		}
 	}()
 
@@ -42,7 +42,7 @@ func main() {
 	*/
 	r := mux.NewRouter()
 
-	r.HandleFunc("/orders", FetchOrdersFilter).Methods("POST")
+	r.HandleFunc("/orders", FetchOrdersAndFilter).Methods("POST")
 	r.HandleFunc("/orders", GetFilteredOrders).Methods("GET")
 
 	http.Handle("/", r)

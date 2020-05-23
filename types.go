@@ -18,6 +18,7 @@ type SimplifiedLineItem struct {
 	ProductID   string `json:"productId,omitempty"`
 	ProductName string `json:"productName,omitempty"`
 	Quantity    int64  `json:"quantity,omitempty"`
+	CreatedOn   string `json:"createdOn,omitempty"`
 }
 
 type FilteredResult struct {
